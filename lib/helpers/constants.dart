@@ -1,0 +1,20 @@
+import 'package:flutter/material.dart';
+
+const Color iconColor = Color(0xffa8a09b);
+const Color correctColor = Colors.green;
+const Color inCorrectColor = Colors.red;
+const Color naturalColor = Colors.white;
+const Color backGroundColor = Colors.white;
+const double oneFont = 0.015;
+const double twoFont = 0.025;
+const double threeFont = 0.035;
+const double fourFont = 0.045;
+const double fiveFont = 0.055;
+const double sixFont = 0.065;
+const double sevenFont = 0.075;
+const double eightFont = 0.85;
+const double nighnFont = 0.95;
+const double tenFont = 0.150;
+const double eleven = 0.11;
+const double twelve = 0.12;
+const double thirteen = 0.13;
