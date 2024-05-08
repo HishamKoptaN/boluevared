@@ -3,6 +3,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:screenshot/screenshot.dart';
 
+import '../pdf/model/oder.dart';
+
 class HomePageController extends ChangeNotifier {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
   String zone = 'null';
@@ -11,9 +13,27 @@ class HomePageController extends ChangeNotifier {
   String zoneDetails = 'null';
   String shopDetails = 'null';
   final List<Map<String, dynamic>> selectedShopsList = [];
+  List<OrderItem> orderItems = [];
   List<DocumentSnapshot> dataList = [];
   ScreenshotController screenshotController = ScreenshotController();
+  void onInit() {
+    converData();
+  }
+
 //    Zones   Methods        //
+  void converData() {
+    orderItems = selectedShopsList.map(
+      (map) {
+        return OrderItem(
+          shopNumber: map['shop_number'] ?? '',
+          width: map['width'] ?? 0,
+          height: map['height'] ?? 0,
+          totalShopArea: map['total_shop_area'] ?? 0,
+          rentValue: map['rent_value'] ?? 0.0,
+        );
+      },
+    ).toList();
+  }
 
   Future<void> getZone(String areaId) async {
     focusShop = 'null';
@@ -49,10 +69,11 @@ class HomePageController extends ChangeNotifier {
           'rent_value': rentValue,
           'height': height,
           'width': width,
-          'total_area': totalArea,
+          'total_shop_area': totalArea,
           'is_booked': isBooked,
         },
       );
+      print(orderItems);
       notifyListeners();
       return true;
     }

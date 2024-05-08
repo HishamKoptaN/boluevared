@@ -51,9 +51,9 @@ class PdfOrderApi {
       MultiPage(
         build: (context) => [
           buildHeader(order),
-          SizedBox(height: 3 * PdfPageFormat.cm),
+          // SizedBox(height: 3 * PdfPageFormat.cm),
           buildTitle(order),
-          buildInvoice(order),
+          buildOrder(order),
           Divider(),
           buildTotal(order),
           Center(
@@ -74,31 +74,33 @@ class PdfOrderApi {
     return PdfApi.saveDocument(name: 'order.pdf', pdf: pdf);
   }
 
-  static Widget buildHeader(Order invoice) => Column(
+  static Widget buildHeader(Order order) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(height: 1 * PdfPageFormat.cm),
+          // SizedBox(height: 1 * PdfPageFormat.cm),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              buildSupplierAddress(invoice.supplier),
-              Container(
-                height: 50,
-                width: 50,
-                child: BarcodeWidget(
-                  barcode: Barcode.qrCode(),
-                  data: invoice.info.number,
-                ),
-              ),
+              buildSupplierAddress(order.supplier),
+              // buildCustomerAddress(order.customer),
+
+              // Container(
+              //   height: 50,
+              //   width: 50,
+              //   child: BarcodeWidget(
+              //     barcode: Barcode.qrCode(),
+              // data: invoice.info.number,
+              // ),
+              // ),
             ],
           ),
-          SizedBox(height: 1 * PdfPageFormat.cm),
+          SizedBox(height: 0.5 * PdfPageFormat.cm),
           Row(
             crossAxisAlignment: CrossAxisAlignment.end,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              buildCustomerAddress(invoice.customer),
-              buildInvoiceInfo(invoice.info),
+              // buildCustomerAddress(order.customer),
+              // buildInvoiceInfo(invoice.info),
             ],
           ),
         ],
@@ -135,7 +137,7 @@ class PdfOrderApi {
           final title = titles[index];
           final value = data[index];
 
-          return buildText(title: title, value: value, width: 200);
+          return buildText(title: title, width: 200);
         },
       ),
     );
@@ -157,13 +159,13 @@ class PdfOrderApi {
             'Order Details',
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
-          SizedBox(height: 0.8 * PdfPageFormat.cm),
-          Text(invoice.info.description),
+          // SizedBox(height: 0.8 * PdfPageFormat.cm),
+          // Text(invoice.info.description),
           SizedBox(height: 0.8 * PdfPageFormat.cm),
         ],
       );
 
-  static Widget buildInvoice(Order order) {
+  static Widget buildOrder(Order order) {
     final headers = [
       'Shop Number',
       'Width',
@@ -171,22 +173,16 @@ class PdfOrderApi {
       'Total shop area',
       'Start date',
       'Quantity',
-      'Unit Price',
-      'Rent Duration',
     ];
     final data = order.items.map(
       (item) {
-        final total = item.unitPrice * item.quantity * (1 + item.vat);
-
         return [
-          item.description,
-          Utils.formatDate(item.date),
-          '${item.quantity}',
-          '\$ ${item.unitPrice}',
-          '${item.vat} %',
+          item.shopNumber.toString(),
           item.width.toString(),
-          item.width.toString(),
-          item.width.toString(),
+          item.height.toString(),
+          item.totalShopArea.toString(),
+          item.height.toString(),
+          item.height.toString(),
         ];
       },
     ).toList();
@@ -203,12 +199,9 @@ class PdfOrderApi {
         0: const FlexColumnWidth(2), 1: const FlexColumnWidth(2),
         2: const FlexColumnWidth(2), // تكبير عرض العمود الأول بمعامل 2
         3: const FlexColumnWidth(2),
-        4: const FlexColumnWidth(2.5),
+        4: const FlexColumnWidth(2),
         5: const FlexColumnWidth(2),
         6: const FlexColumnWidth(2),
-        7: const FlexColumnWidth(2),
-        8: const FlexColumnWidth(
-            2), // يمكنك تعيين قيم مختلفة لكل عمود حسب الحاجة
       },
       cellAlignments: {
         0: Alignment.centerLeft,
@@ -223,12 +216,6 @@ class PdfOrderApi {
   }
 
   static Widget buildTotal(Order invoice) {
-    final netTotal = invoice.items
-        .map((item) => item.unitPrice * item.quantity)
-        .reduce((item1, item2) => item1 + item2);
-    final vatPercent = invoice.items.first.vat;
-    final vat = netTotal * vatPercent;
-    final total = netTotal + vat;
     return Container(
       alignment: Alignment.centerRight,
       child: Row(
@@ -241,7 +228,6 @@ class PdfOrderApi {
               children: [
                 buildText(
                   title: 'Net total area',
-                  value: Utils.formatNmber(netTotal),
                   unite: true,
                 ),
                 Divider(),
@@ -251,7 +237,6 @@ class PdfOrderApi {
                     fontSize: 14,
                     fontWeight: FontWeight.bold,
                   ),
-                  value: Utils.formatPrice(total),
                   unite: true,
                 ),
                 SizedBox(height: 2 * PdfPageFormat.mm),
@@ -295,7 +280,6 @@ class PdfOrderApi {
 
   static buildText({
     required String title,
-    required String value,
     double width = double.infinity,
     TextStyle? titleStyle,
     bool unite = false,
@@ -307,7 +291,6 @@ class PdfOrderApi {
       child: Row(
         children: [
           Expanded(child: Text(title, style: style)),
-          Text(value, style: unite ? style : null),
         ],
       ),
     );

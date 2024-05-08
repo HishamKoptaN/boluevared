@@ -9,6 +9,7 @@ import 'firebase_options.dart';
 import 'home_page/home_page_controller.dart';
 import 'home_page/home_page_view.dart';
 import 'navigator_bottom_bar/navigator_bottom_bar_view.dart';
+import 'test.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -37,9 +38,8 @@ class MyApp extends StatelessWidget {
           providers: [
             ChangeNotifierProvider(create: (_) => HomePageController()),
           ],
-          child:
-              // const MyHomePage(),
-              const NavigateBarScreen(),
+          child: MyHomePage(),
+          // const NavigateBarScreen(),
         ),
       ),
     );
