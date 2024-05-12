@@ -1,0 +1,103 @@
+{
+    "luxury_zone_a": {
+    "zone_name": "Luxury Zone A",
+    "zone_id": 7,
+    "__collections__": {
+        "ground_floor": {
+            "1": {
+                "shop_number": 1,
+                "height": 46,
+                "width": 21,
+                "total_area": 420.2,
+                "rent_value": 367,
+                "is_booked": false,
+                "__collections__": {}
+            },
+            "2": {
+                "shop_number": 1,
+                "height": 46,
+                "width": 21,
+                "total_area": 71.6,
+                "rent_value": 367,
+                "is_booked": false,
+                "__collections__": {}
+            },
+            "3": {
+                "shop_number": 1,
+                "height": 46,
+                "width": 21,
+                "total_area": 418.7,
+                "rent_value": 367,
+                "is_booked": false,
+                "__collections__": {}
+            }
+        },  "4": {
+            "shop_number": 4,
+            "height": 46,
+            "width": 21,
+            "total_area": 181.9,
+            "rent_value": 367,
+            "is_booked": false,
+            "__collections__": {}
+        },
+        "5": {
+            "shop_number": 5,
+            "height": 46,
+            "width": 21,
+            "total_area":515.9,
+            "rent_value": 367,
+            "is_booked": false,
+            "__collections__": {}
+        },
+        
+        
+        "first_floor": {
+            "1": {
+                "shop_number": 1,
+                "height": 46,
+                "width": 21,
+                "total_area": 446.3,
+                "rent_value": 367,
+                "is_booked": false,
+                "__collections__": {}
+            },
+            "2": {
+                "shop_number": 2,
+                "height": 46,
+                "width": 21,
+                "total_area": 105.2,
+                "rent_value": 367,
+                "is_booked": false,
+                "__collections__": {}
+            },
+            "3": {
+                "shop_number": 3,
+                "height": 46,
+                "width": 21,
+                "total_area": 444.8,
+                "rent_value": 367,
+                "is_booked": false,
+                "__collections__": {}
+            },
+            "4": {
+                "shop_number": 3,
+                "height": 46,
+                "width": 21,
+                "total_area": 195.8,
+                "rent_value": 367,
+                "is_booked": false,
+                "__collections__": {}
+            },
+            "5": {
+                "shop_number": 3,
+                "height": 46,
+                "width": 21,
+                "total_area": 596.1,
+                "rent_value": 367,
+                "is_booked": false,
+                "__collections__": {}
+            }
+        }
+      }
+   }
+}

@@ -1,0 +1,45 @@
+{
+    "banks": {
+        "zone_name": "Banks",
+        "zone_id": 8,
+        "__collections__": {
+            "ground_floor": {
+                "1": {
+                    "shop_number": 1,
+                    "height": 9.78,
+                    "width": 41.77,
+                    "total_area": 204,
+                    "rent_value": 2000,
+                    "__collections__": {}
+                },
+                "2": {
+                    "shop_number": 2,
+                    "height": 9.78,
+                    "width": 41.77,
+                    "total_area": 204,
+                    "rent_value": 2000,
+                    "__collections__": {}
+                }
+            },
+            
+            "first_floor": {
+                "1": {
+                    "shop_number": 1,
+                    "height": 9.78,
+                    "width": 41.77,
+                    "total_area": 204,
+                    "rent_value": 2000,
+                    "__collections__": {}
+                },
+                "2": {
+                    "shop_number": 2,
+                    "height": 9.78,
+                    "width": 41.77,
+                    "total_area": 204,
+                    "rent_value": 2000,
+                    "__collections__": {}
+                }
+            }
+        }
+    }
+}

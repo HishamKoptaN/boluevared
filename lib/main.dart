@@ -16,7 +16,7 @@ Future<void> main() async {
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
-  ]);
+  ],);
   try {} catch (e, st) {
     print(e);
     print(st);
@@ -28,7 +28,7 @@ Future<void> main() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
           providers: [
             ChangeNotifierProvider(create: (_) => HomePageController()),
           ],
-          child: MyHomePage(),
+          child: const MyHomePage(),
           // const NavigateBarScreen(),
         ),
       ),

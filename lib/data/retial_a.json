@@ -1,0 +1,29 @@
+{
+    "retail_a": {
+        "zone_name": "Retail A",
+        "zone_id": 2,
+        "__collections__": {
+            "ground_floor": {
+                "1": {
+                    "shop_number": 1,
+                    "height": 46,
+                    "width": 21,
+                    "total_area": 1066.1,
+                    "rent_value": 367,
+                    "is_booked": false,
+                    "__collections__": {}
+                },
+                "2": {
+                    "shop_number": 2,
+                    "width": 22,
+                    "height": 47,
+                    "total_area": 387.1,
+                    "rent_value": 369,
+                    "is_booked": true,
+                    "__collections__": {}
+                }
+              
+            }
+        }
+    }
+}

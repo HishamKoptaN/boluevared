@@ -42,9 +42,6 @@ class _PdfPageState extends State<PdfPage> {
                       text: 'Order PDF',
                       onClicked: () async {
                         value.converData();
-                        final date = DateTime.now();
-                        final dueDate = date.add(const Duration(days: 7));
-
                         final order = Order.order(
                             supplier: const Supplier(
                               name: 'Eng / Khaled Al-Husseini',
@@ -54,24 +51,17 @@ class _PdfPageState extends State<PdfPage> {
                               name: 'Ahmed Mohamed.',
                               address: 'Iraq,Ba',
                             ),
-                            // info: OrderInfo(
-                            //   date: date,
-                            //   dueDate: dueDate,
-                            //   description: 'Order description...',
-                            //   number: '${DateTime.now().year}-9999',
-                            // ),
-                            items:
-                                //  value.orderItems
-
-                                [
-                              OrderItem(
-                                shopNumber: 1,
-                                width: 2,
-                                height: 3,
-                                totalShopArea: 4,
-                                rentValue: 5,
-                              )
-                            ]);
+                            items: value.orderItems
+                            //     [
+                            //   OrderItem(
+                            //     shopNumber: 1,
+                            //     width: 2,
+                            //     height: 3,
+                            //     totalShopArea: 4,
+                            //     rentValue: 5,
+                            //   )
+                            // ],
+                            );
                         final pdfFile = await PdfOrderApi.generate(order);
                         PdfApi.openFile(pdfFile);
                       },

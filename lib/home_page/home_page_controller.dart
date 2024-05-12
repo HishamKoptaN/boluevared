@@ -2,38 +2,59 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:screenshot/screenshot.dart';
-
 import '../pdf/model/oder.dart';
+import '../pdf_images/pdf_images_api/pdf_images_api.dart';
 
 class HomePageController extends ChangeNotifier {
+  List retailD = [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+  ];
+  List foodCourt = [
+    1,
+    2,
+  ];
+
+  List entertainment = [
+    1,
+    2,
+  ];
+
+  List banks = [
+    1,
+    2,
+  ];
+  //    Home   Variables        //
+  ScreenshotController bluevaredScreenshotController = ScreenshotController();
+  ScreenshotController pdfScreenshotController = ScreenshotController();
+
+  late Uint8List bluevaredScreenshot;
+  late Uint8List pdfScreenshot;
+  //    Zones   Variables        //
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
   String zone = 'null';
   String focusZone = 'null';
   String focusShop = 'null';
   String zoneDetails = 'null';
   String shopDetails = 'null';
+
+//    Zones   Variables        //
+
+  List luxuryZone = [3, 4, 5, 6, 7, 8, 9];
   final List<Map<String, dynamic>> selectedShopsList = [];
   List<OrderItem> orderItems = [];
   List<DocumentSnapshot> dataList = [];
-  ScreenshotController screenshotController = ScreenshotController();
-  void onInit() {
-    converData();
-  }
+  List<int> selected = [1];
+  //    Pdf   Variables        //
 
+  int totalRentValue = 0;
+  int totalShopsArea = 0;
 //    Zones   Methods        //
-  void converData() {
-    orderItems = selectedShopsList.map(
-      (map) {
-        return OrderItem(
-          shopNumber: map['shop_number'] ?? '',
-          width: map['width'] ?? 0,
-          height: map['height'] ?? 0,
-          totalShopArea: map['total_shop_area'] ?? 0,
-          rentValue: map['rent_value'] ?? 0.0,
-        );
-      },
-    ).toList();
-  }
 
   Future<void> getZone(String areaId) async {
     focusShop = 'null';
@@ -69,21 +90,28 @@ class HomePageController extends ChangeNotifier {
           'rent_value': rentValue,
           'height': height,
           'width': width,
-          'total_shop_area': totalArea,
+          'shop_total_area': totalArea,
           'is_booked': isBooked,
         },
       );
-      print(orderItems);
+      totalRentValue += rentValue;
+      totalShopsArea += totalArea;
       notifyListeners();
       return true;
     }
     return false;
+  }
+
+  sumMinceTotal(int rentValue, int totalShopsRentValue) {
+    totalShopsRentValue -= rentValue;
+    totalShopsArea -= totalShopsRentValue;
   }
 //    Selected  Shops   Methods        //
 
   removeShopDetails(item) {
     selectedShopsList.removeWhere(
         (element) => element['shop_number'] == item['shop_number']);
+
     notifyListeners();
   }
 
@@ -111,7 +139,7 @@ class HomePageController extends ChangeNotifier {
             'rent_value': width + height + 300,
             'height': width,
             'width': height,
-            'total_area': width * height,
+            'shop_total_area': width * height,
             'is_booked': isBooked,
           },
         );
@@ -123,10 +151,23 @@ class HomePageController extends ChangeNotifier {
     }
   }
 
-  void takeScreenshot(context) {
-    screenshotController.capture(delay: const Duration(milliseconds: 10)).then(
+  void takeScreenshot(context) async {
+    await bluevaredScreenshotController
+        .capture(delay: const Duration(milliseconds: 10))
+        .then(
       (capturedImage) async {
-        ShowCapturedWidget(context, capturedImage!);
+        bluevaredScreenshot = capturedImage!;
+      },
+    ).catchError(
+      (onError) {
+        print(onError);
+      },
+    );
+    await pdfScreenshotController
+        .capture(delay: const Duration(milliseconds: 10))
+        .then(
+      (capturedImage) async {
+        pdfScreenshot = capturedImage!;
       },
     ).catchError(
       (onError) {
@@ -149,6 +190,25 @@ class HomePageController extends ChangeNotifier {
     );
   }
 
+  void generate() async {
+    final pdfFile =
+        await PdfImagesApi.generateImage(bluevaredScreenshot, pdfScreenshot);
+    PdfImagesApi.openFile(pdfFile);
+  }
+
+  void converData() {
+    orderItems = selectedShopsList.map(
+      (map) {
+        return OrderItem(
+          shopNumber: map['shop_number'] ?? '',
+          width: map['width'] ?? 0,
+          height: map['height'] ?? 0,
+          totalShopArea: map['total_shop_area'] ?? 0,
+          rentValue: map['rent_value'] ?? 0.0,
+        );
+      },
+    ).toList();
+  }
   // Future<void> getShopDetails(String zoneId, String shopId) async {
   //   focusShop = shopId;
   //   try {

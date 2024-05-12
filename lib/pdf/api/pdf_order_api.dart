@@ -3,7 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:pdf/widgets.dart';
+import 'package:provider/provider.dart';
 import 'package:screenshot/screenshot.dart';
+import '../../home_page/home_page_controller.dart';
 import '../model/customer.dart';
 import '../model/oder.dart';
 import '../model/supplier.dart';
@@ -11,8 +13,9 @@ import '../utils.dart';
 import 'pdf_api.dart';
 
 class PdfOrderApi {
-  ScreenshotController screenshotController = ScreenshotController();
-  void takeScreenshot(context) {
+  static ScreenshotController screenshotController = ScreenshotController();
+  final homProv = Provider.of<HomePageController>;
+  static void takeScreenshot(context) {
     try {
       screenshotController
           .capture(delay: const Duration(milliseconds: 10))

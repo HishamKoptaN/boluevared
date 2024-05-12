@@ -1,0 +1,124 @@
+{
+    "luxury_zone_b": {
+        "zone_name": "Luxury Zone B",
+        "zone_id": 9,
+        "__collections__": {
+            "ground_floor": {
+                "1": {
+                    "shop_number": 2,
+                    "height": 9.78,
+                    "width": 41.77,
+                    "total_area": 61.1,
+                    "rent_value": 2000,
+                    "__collections__": {}
+                },
+                "2": {
+                    "shop_number": 2,
+                    "height": 9.78,
+                    "width": 41.77,
+                    "total_area": 59.1,
+                    "rent_value": 2000,
+                    "__collections__": {}
+                },
+                "3": {
+                    "shop_number": 2,
+                    "height": 9.78,
+                    "width": 41.77,
+                    "total_area":59.1,
+                    "rent_value": 2000,
+                    "__collections__": {}
+                },
+                "4": {
+                    "shop_number": 2,
+                    "height": 9.78,
+                    "width": 41.77,
+                    "total_area": 59.1,
+                    "rent_value": 2000,
+                    "__collections__": {}
+                },
+                "5": {
+                    "shop_number": 2,
+                    "height": 9.78,
+                    "width": 41.77,
+                    "total_area":59.1,
+                    "rent_value": 2000,
+                    "__collections__": {}
+                },
+                "6": {
+                    "shop_number": 2,
+                    "height": 9.78,
+                    "width": 41.77,
+                    "total_area": 59.1,
+                    "rent_value": 2000,
+                    "__collections__": {}
+                },
+                "7": {
+                    "shop_number": 2,
+                    "height": 9.78,
+                    "width": 41.77,
+                    "total_area": 61.1,
+                    "rent_value": 2000,
+                    "__collections__": {}
+                }
+            },
+             "first_floor": {
+                "1": {
+                    "shop_number": 2,
+                    "height": 9.78,
+                    "width": 41.77,
+                    "total_area": 61.1,
+                    "rent_value": 2000,
+                    "__collections__": {}
+                },
+                "2": {
+                    "shop_number": 2,
+                    "height": 9.78,
+                    "width": 41.77,
+                    "total_area": 59.1,
+                    "rent_value": 2000,
+                    "__collections__": {}
+                },
+                "3": {
+                    "shop_number": 2,
+                    "height": 9.78,
+                    "width": 41.77,
+                    "total_area":59.1,
+                    "rent_value": 2000,
+                    "__collections__": {}
+                },
+                "4": {
+                    "shop_number": 2,
+                    "height": 9.78,
+                    "width": 41.77,
+                    "total_area": 59.1,
+                    "rent_value": 2000,
+                    "__collections__": {}
+                },
+                "5": {
+                    "shop_number": 2,
+                    "height": 9.78,
+                    "width": 41.77,
+                    "total_area":59.1,
+                    "rent_value": 2000,
+                    "__collections__": {}
+                },
+                "6": {
+                    "shop_number": 2,
+                    "height": 9.78,
+                    "width": 41.77,
+                    "total_area": 59.1,
+                    "rent_value": 2000,
+                    "__collections__": {}
+                },
+                "7": {
+                    "shop_number": 2,
+                    "height": 9.78,
+                    "width": 41.77,
+                    "total_area": 61.1,
+                    "rent_value": 2000,
+                    "__collections__": {}
+                }
+            }
+        }
+    }
+}

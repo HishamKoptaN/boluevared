@@ -1,0 +1,73 @@
+{
+    "retail_d": {
+        "zone_name": "Retail D",
+        "zone_id": 2,
+        "__collections__": {
+            "ground_floor": {
+                "1": {
+                    "shop_number": 1,
+                    "height": 46,
+                    "width": 21,
+                    "rent_value": 367,
+                    "total_area": 966,
+                    "is_booked": false,
+                    "__collections__": {}
+                },
+                "2": {
+                    "total_area": 1034,
+                    "shop_number": 2,
+                    "width": 22,
+                    "rent_value": 369,
+                    "is_booked": true,
+                    "height": 47,
+                    "__collections__": {}
+                },
+                "3": {
+                    "total_area": 1104,
+                    "shop_number": 3,
+                    "width": 23,
+                    "rent_value": 371,
+                    "is_booked": true,
+                    "height": 48,
+                    "__collections__": {}
+                },
+                "4": {
+                    "total_area": 1176,
+                    "shop_number": 4,
+                    "width": 24,
+                    "rent_value": 373,
+                    "is_booked": true,
+                    "height": 49,
+                    "__collections__": {}
+                },
+                "5": {
+                    "total_area": 1250,
+                    "shop_number": 5,
+                    "width": 25,
+                    "rent_value": 375,
+                    "is_booked": true,
+                    "height": 50,
+                    "__collections__": {}
+                },
+                "6": {
+                    "total_area": 1326,
+                    "shop_number": 6,
+                    "width": 26,
+                    "rent_value": 377,
+                    "is_booked": true,
+                    "height": 51,
+                    "__collections__": {}
+                },
+                "7": {
+                    "total_area": 1404,
+                    "shop_number": 7,
+                    "width": 27,
+                    "rent_value": 379,
+                    "height": 52,
+                    "is_booked": false,
+                    "__collections__": {}
+                }
+            }
+        }
+    }
+}

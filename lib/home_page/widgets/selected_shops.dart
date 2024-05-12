@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:real_estate_map/helpers/media_query.dart';
 import '../../helpers/constants.dart';
+import '../../pdf_images/pdf_images_api/pdf_images_api.dart';
+import '../../pdf_images/widget/button_widget.dart';
 import '../home_page_controller.dart';
 
 class SelectedShops extends StatelessWidget {
@@ -37,6 +39,8 @@ class SelectedShops extends StatelessWidget {
                             icon: const Icon(Icons.delete),
                             onPressed: () async {
                               await cnr.removeShopDetails(item);
+                              cnr.sumMinceTotal(
+                                  item['rent_value'], item['total_area']);
                             },
                           ),
                           MyText(
@@ -81,30 +85,16 @@ class SelectedShops extends StatelessWidget {
                   },
                 ),
               ),
-              Spacer(),
-              GestureDetector(
-                onTap: () {
-                  Provider.of<HomePageController>(context, listen: false)
-                      .takeScreenshot(context);
+              const Spacer(),
+              ButtonWidget(
+                text: 'Image PDF',
+                onClicked: () async {
+                  final pdfFile = await PdfImagesApi.generateImage(
+                      cnr.bluevaredScreenshot, cnr.pdfScreenshot);
+                  PdfImagesApi.openFile(pdfFile);
                 },
-                child: Center(
-                  child: Container(
-                    decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(5)),
-                        color: Colors.green),
-                    height: context.screenHeight * 7,
-                    width: context.screenWidth * 10,
-                    child: Center(
-                      child: MyText(
-                        fontSize: context.screenSize * twoFont,
-                        fieldName: 'Continue',
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ),
               ),
-              Spacer(),
+              const Spacer(),
             ],
           );
         },
