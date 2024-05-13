@@ -1,44 +1,47 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MyAppOffest extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Offset Example'),
-        ),
-        body: Center(
-          child: Container(
-            width: 200,
-            height: 200,
-            color: Colors.blue,
-            child: Stack(
-              children: <Widget>[
-                Positioned(
-                  left: 50,
-                  top: 50,
-                  child: Container(
-                    width: 100,
-                    height: 100,
-                    color: Colors.red,
-                    child: const Center(
-                      child: Text(
-                        'Positioned Widget',
-                        style: TextStyle(color: Colors.white),
+    return ScreenUtilInit(
+      child: MaterialApp(
+        home: Scaffold(
+          appBar: AppBar(
+            title: const Text('Offset Example'),
+          ),
+          body: Center(
+            child: Container(
+              width: 200,
+              height: 200,
+              color: Colors.blue,
+              child: Stack(
+                children: <Widget>[
+                  Positioned(
+                    left: 50,
+                    top: 50,
+                    child: Container(
+                      width: 100,
+                      height: 100,
+                      color: Colors.red,
+                      child: const Center(
+                        child: Text(
+                          'Positioned Widget',
+                          style: TextStyle(color: Colors.white),
+                        ),
                       ),
                     ),
                   ),
-                ),
-                CustomPaint(
-                  painter: MyCustomPainter(),
-                ),
-                GestureDetector(
-                  onTapDown: (TapDownDetails details) {
-                    print('Tap Position: ${details.globalPosition}');
-                  },
-                ),
-              ],
+                  CustomPaint(
+                    painter: MyCustomPainter(),
+                  ),
+                  GestureDetector(
+                    onTapDown: (TapDownDetails details) {
+                      print('Tap Position: ${details.globalPosition}');
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
         ),

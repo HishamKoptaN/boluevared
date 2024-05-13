@@ -1,13 +1,9 @@
-// ignore_for_file: unused_import
-import 'package:flutter/foundation.dart';
+import 'package:boluevared/helpers/media_query.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:real_estate_map/helpers/media_query.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import '../../helpers/constants.dart';
-import '../../test.dart';
 import '../home_page/home_page_controller.dart';
 import 'navigator_bottom_bar_cnr.dart';
 

@@ -1,6 +1,6 @@
+import 'package:boluevared/helpers/media_query.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:real_estate_map/helpers/media_query.dart';
 import '../../helpers/constants.dart';
 import '../home_page_controller.dart';
 import 'selected_shops.dart';

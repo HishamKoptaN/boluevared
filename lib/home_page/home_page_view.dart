@@ -1,6 +1,7 @@
+import 'package:boluevared/helpers/media_query.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:real_estate_map/helpers/media_query.dart';
 import 'package:screenshot/screenshot.dart';
 import '../helpers/constants.dart';
 import 'home_page_controller.dart';
@@ -22,245 +23,240 @@ class _MyHomePageState extends State<MyHomePage> {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.grey,
-          title: const Text('boluevared'),
+          title: Text(
+            'boluevared',
+            style: TextStyle(fontSize: 20.r),
+          ),
         ),
         drawer: const MyDrawer(),
-        body: SizedBox(
-          child: SingleChildScrollView(
-            child: Consumer<HomePageController>(
-              builder: (context, cnr, child) {
-                return Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Screenshot(
-                      controller: cnr.bluevaredScreenshotController,
-                      child: Image.network(
-                        width: context.screenWidth * 100,
-                        height: context.screenHeight * 80,
-                        'https://firebasestorage.googleapis.com/v0/b/boulevared.appspot.com/o/boulevared.png?alt=media&token=84a2588e-7670-4d84-9649-80ca50ee935c',
-                        fit: BoxFit.contain,
-                      ),
-                    ),
-                    const Divider(
-                      thickness: 3,
-                    ),
-                    cnr.selectedShopsList.isEmpty
-                        ? const SizedBox()
-                        : SizedBox(
-                            width: context.screenWidth * 100,
-                            height: context.screenHeight * 90,
-                            child: Screenshot(
-                              controller: cnr.pdfScreenshotController,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  const Spacer(
-                                    flex: 1,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      MyContainer(
-                                        item: 'Shop number',
-                                        color: Colors.grey,
-                                      ),
-                                      MyContainer(
-                                        item: 'Shop height',
-                                        color: Colors.grey,
-                                      ),
-                                      MyContainer(
-                                        item: 'Shop width',
-                                        color: Colors.grey,
-                                      ),
-                                      MyContainer(
-                                        item: 'Shop total area ',
-                                        color: Colors.grey,
-                                      ),
-                                      MyContainer(
-                                        item: 'Rent value',
-                                        color: Colors.grey,
-                                      ),
-                                    ],
-                                  ),
-                                  const Spacer(
-                                    flex: 1,
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 160),
-                                    child: SizedBox(
-                                      height: context.screenHeight * 20,
-                                      child: ListView.builder(
-                                        itemCount: cnr.selectedShopsList.length,
-                                        itemBuilder:
-                                            (BuildContext context, int index) {
-                                          final item =
-                                              cnr.selectedShopsList[index];
-                                          return Center(
-                                            child: SizedBox(
-                                              child: Column(
-                                                children: [
-                                                  Row(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      MyContainer(
-                                                        item:
-                                                            item['shop_number']
-                                                                .toString(),
-                                                        color: Colors.white,
-                                                      ),
-                                                      MyContainer(
-                                                        item: item['height']
-                                                            .toString(),
-                                                        color: Colors.white,
-                                                      ),
-                                                      MyContainer(
-                                                        item: item['width']
-                                                            .toString(),
-                                                        color: Colors.white,
-                                                      ),
-                                                      MyContainer(
-                                                        item: item[
-                                                                'shop_total_area']
-                                                            .toString(),
-                                                        color: Colors.white,
-                                                      ),
-                                                      MyContainer(
-                                                        item:
-                                                            '${(item['rent_value'].toString())} \$',
-                                                        color: Colors.white,
-                                                      ),
-                                                      // IconButton(
-                                                      //   icon: const Icon(Icons.delete),
-                                                      //   onPressed: () async {
-                                                      //     await cnr.removeShopDetails(item);
-                                                      //   },
-                                                      // ),
-                                                    ],
-                                                  ),
-                                                  Divider(
-                                                    endIndent:
-                                                        context.screenWidth *
-                                                            13,
-                                                    thickness: 1,
-                                                    color: Colors.black,
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          );
-                                        },
-                                      ),
-                                    ),
-                                  ),
-                                  const Divider(
-                                    thickness: 2,
+        body: Center(
+          child: SizedBox(
+            width: context.screenWidth * 100,
+            height: context.screenHeight * 100,
+            child: SingleChildScrollView(
+              child: Consumer<HomePageController>(
+                builder: (context, cnr, child) {
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      LayoutBuilder(
+                        builder:
+                            (BuildContext context, BoxConstraints constraints) {
+                          double localeHeight = constraints.maxHeight;
+                          double localeWidth = constraints.maxWidth;
+                          return Screenshot(
+                            controller: cnr.bluevaredScreenshotController,
+                            child: Stack(
+                              children: [
+                                Image.network(
+                                  width: localeHeight,
+                                  height: localeWidth,
+                                  'https://firebasestorage.googleapis.com/v0/b/boulevared.appspot.com/o/boulevared.png?alt=media&token=84a2588e-7670-4d84-9649-80ca50ee935c',
+                                  fit: BoxFit.contain,
+                                ),
+                                // Positioned(
+                                //   top: localeHeight / 2,
+                                //   right: localeWidth / 2,
+                                //   child: Image.asset(
+                                //       height: localeHeight / 100,
+                                //       width: localeWidth / 100,
+                                //       'assets/map_pin.png'),
+                                // ),
+                                Center(
+                                  child: Container(
+                                    width: localeWidth / 100,
+                                    height: localeHeight / 100,
                                     color: Colors.black,
                                   ),
-                                  SizedBox(
-                                    width: context.screenWidth * 100,
-                                    height: context.screenHeight * 30,
-                                    child: Column(
+                                )
+                              ],
+                            ),
+                          );
+                        },
+                      ),
+                      const Divider(
+                        thickness: 3,
+                      ),
+                      cnr.selectedShopsList.isEmpty
+                          ? const SizedBox()
+                          : SizedBox(
+                              width: context.screenWidth * 100,
+                              height: context.screenHeight * 90,
+                              child: Screenshot(
+                                controller: cnr.pdfScreenshotController,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    const Spacer(
+                                      flex: 1,
+                                    ),
+                                    Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [
-                                        //    Manager        //
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            const Spacer(
-                                              flex: 1,
-                                            ),
-                                            SizedBox(
-                                              width: context.screenWidth * 20,
-                                              height: context.screenHeight * 30,
-                                              child: Column(
-                                                children: [
-                                                  MyText(
-                                                    fontWeight: FontWeight.bold,
-                                                    textDirection:
-                                                        TextDirection.ltr,
-                                                    fieldName:
-                                                        'Khalid Muhaisen',
-                                                    fontSize:
-                                                        context.screenSize *
-                                                            oneFont,
-                                                    color: Colors.black,
-                                                  ),
-                                                  MyText(
-                                                    fontWeight: FontWeight.w500,
-                                                    textDirection:
-                                                        TextDirection.ltr,
-                                                    fieldName:
-                                                        'Baghdad Boulevard Manager',
-                                                    fontSize:
-                                                        context.screenSize *
-                                                            oneFont,
-                                                    color: Colors.black,
-                                                  ),
-                                                  const Spacer(
-                                                    flex: 2,
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                            const Spacer(
-                                              flex: 2,
-                                            ),
-                                            SizedBox(
-                                              width: context.screenWidth * 20,
-                                              height: context.screenHeight * 30,
-                                              child: Column(
-                                                children: [
-                                                  Row(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      MyText(
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        textDirection:
-                                                            TextDirection.ltr,
-                                                        fieldName:
-                                                            'Total rent value',
-                                                        fontSize:
-                                                            context.screenSize *
-                                                                oneFont,
-                                                        color: Colors.black,
-                                                      ),
-                                                      const Spacer(
-                                                        flex: 2,
-                                                      ),
-                                                      MyText(
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        textDirection:
-                                                            TextDirection.ltr,
-                                                        fieldName:
-                                                            '${cnr.totalRentValue.toString()} \$',
-                                                        fontSize:
-                                                            context.screenSize *
-                                                                oneFont,
-                                                        color: Colors.black,
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  const Divider(
-                                                    thickness: 2,
-                                                  ),
-                                                  SizedBox(
-                                                    width: context.screenWidth *
-                                                        20,
-                                                    height:
-                                                        context.screenHeight *
-                                                            5,
-                                                    child: Row(
+                                        MyContainer(
+                                          item: 'Shop number',
+                                          color: Colors.grey,
+                                        ),
+                                        MyContainer(
+                                          item: 'Shop height',
+                                          color: Colors.grey,
+                                        ),
+                                        MyContainer(
+                                          item: 'Shop width',
+                                          color: Colors.grey,
+                                        ),
+                                        MyContainer(
+                                          item: 'Shop total area ',
+                                          color: Colors.grey,
+                                        ),
+                                        MyContainer(
+                                          item: 'Rent value',
+                                          color: Colors.grey,
+                                        ),
+                                      ],
+                                    ),
+                                    const Spacer(
+                                      flex: 1,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 160),
+                                      child: SizedBox(
+                                        height: context.screenHeight * 20,
+                                        child: ListView.builder(
+                                          itemCount:
+                                              cnr.selectedShopsList.length,
+                                          itemBuilder: (BuildContext context,
+                                              int index) {
+                                            final item =
+                                                cnr.selectedShopsList[index];
+                                            return Center(
+                                              child: SizedBox(
+                                                child: Column(
+                                                  children: [
+                                                    Row(
                                                       crossAxisAlignment:
                                                           CrossAxisAlignment
                                                               .center,
+                                                      children: [
+                                                        MyContainer(
+                                                          item: item[
+                                                                  'shop_number']
+                                                              .toString(),
+                                                          color: Colors.white,
+                                                        ),
+                                                        MyContainer(
+                                                          item: item['height']
+                                                              .toString(),
+                                                          color: Colors.white,
+                                                        ),
+                                                        MyContainer(
+                                                          item: item['width']
+                                                              .toString(),
+                                                          color: Colors.white,
+                                                        ),
+                                                        MyContainer(
+                                                          item: item[
+                                                                  'shop_total_area']
+                                                              .toString(),
+                                                          color: Colors.white,
+                                                        ),
+                                                        MyContainer(
+                                                          item:
+                                                              '${(item['rent_value'].toString())} \$',
+                                                          color: Colors.white,
+                                                        ),
+                                                        // IconButton(
+                                                        //   icon: const Icon(Icons.delete),
+                                                        //   onPressed: () async {
+                                                        //     await cnr.removeShopDetails(item);
+                                                        //   },
+                                                        // ),
+                                                      ],
+                                                    ),
+                                                    Divider(
+                                                      endIndent:
+                                                          context.screenWidth *
+                                                              13,
+                                                      thickness: 1,
+                                                      color: Colors.black,
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                      ),
+                                    ),
+                                    const Divider(
+                                      thickness: 2,
+                                      color: Colors.black,
+                                    ),
+                                    SizedBox(
+                                      width: context.screenWidth * 100,
+                                      height: context.screenHeight * 30,
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          //    Manager        //
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              const Spacer(
+                                                flex: 1,
+                                              ),
+                                              SizedBox(
+                                                width: context.screenWidth * 20,
+                                                height:
+                                                    context.screenHeight * 30,
+                                                child: Column(
+                                                  children: [
+                                                    MyText(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      textDirection:
+                                                          TextDirection.ltr,
+                                                      fieldName:
+                                                          'Khalid Muhaisen',
+                                                      fontSize:
+                                                          context.screenSize *
+                                                              oneFont,
+                                                      color: Colors.black,
+                                                    ),
+                                                    MyText(
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      textDirection:
+                                                          TextDirection.ltr,
+                                                      fieldName:
+                                                          'Baghdad Boulevard Manager',
+                                                      fontSize:
+                                                          context.screenSize *
+                                                              oneFont,
+                                                      color: Colors.black,
+                                                    ),
+                                                    const Spacer(
+                                                      flex: 2,
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              const Spacer(
+                                                flex: 2,
+                                              ),
+                                              SizedBox(
+                                                width: context.screenWidth * 20,
+                                                height:
+                                                    context.screenHeight * 30,
+                                                child: Column(
+                                                  children: [
+                                                    Row(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
                                                       children: [
                                                         MyText(
                                                           fontWeight:
@@ -268,7 +264,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                           textDirection:
                                                               TextDirection.ltr,
                                                           fieldName:
-                                                              'Total shops area',
+                                                              'Total rent value',
                                                           fontSize: context
                                                                   .screenSize *
                                                               oneFont,
@@ -282,9 +278,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                                               FontWeight.bold,
                                                           textDirection:
                                                               TextDirection.ltr,
-                                                          fieldName: cnr
-                                                              .totalShopsArea
-                                                              .toString(),
+                                                          fieldName:
+                                                              '${cnr.totalRentValue.toString()} \$',
                                                           fontSize: context
                                                                   .screenSize *
                                                               oneFont,
@@ -292,61 +287,125 @@ class _MyHomePageState extends State<MyHomePage> {
                                                         ),
                                                       ],
                                                     ),
-                                                  ),
-                                                ],
+                                                    const Divider(
+                                                      thickness: 2,
+                                                    ),
+                                                    SizedBox(
+                                                      width:
+                                                          context.screenWidth *
+                                                              20,
+                                                      height:
+                                                          context.screenHeight *
+                                                              5,
+                                                      child: Row(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          MyText(
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            textDirection:
+                                                                TextDirection
+                                                                    .ltr,
+                                                            fieldName:
+                                                                'Total shops area',
+                                                            fontSize: context
+                                                                    .screenSize *
+                                                                oneFont,
+                                                            color: Colors.black,
+                                                          ),
+                                                          const Spacer(
+                                                            flex: 2,
+                                                          ),
+                                                          MyText(
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            textDirection:
+                                                                TextDirection
+                                                                    .ltr,
+                                                            fieldName: cnr
+                                                                .totalShopsArea
+                                                                .toString(),
+                                                            fontSize: context
+                                                                    .screenSize *
+                                                                oneFont,
+                                                            color: Colors.black,
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
                                               ),
-                                            ),
-                                            const Spacer(
-                                              flex: 1,
-                                            ),
-                                          ],
-                                        ),
-                                      ],
+                                              const Spacer(
+                                                flex: 1,
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                  GestureDetector(
-                                    onTap: () async {
-                                      Provider.of<HomePageController>(context,
-                                              listen: false)
-                                          .takeScreenshot(context);
-                                      cnr.generate();
-                                    },
-                                    child: Center(
-                                      child: Container(
-                                        height: context.screenHeight * 7,
-                                        width: context.screenWidth * 10,
-                                        decoration: const BoxDecoration(
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(5)),
-                                            color: Colors.green),
-                                        child: Center(
-                                          child: MyText(
-                                            fontSize:
-                                                context.screenSize * twoFont,
-                                            fieldName: 'Continue',
-                                            color: Colors.white,
-                                            textDirection: TextDirection.ltr,
-                                            fontWeight: FontWeight.bold,
+                                    GestureDetector(
+                                      onTap: () async {
+                                        Provider.of<HomePageController>(context,
+                                                listen: false)
+                                            .takeScreenshot(context);
+                                        cnr.generate();
+                                      },
+                                      child: Center(
+                                        child: Container(
+                                          height: context.screenHeight * 7,
+                                          width: context.screenWidth * 10,
+                                          decoration: const BoxDecoration(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(5)),
+                                              color: Colors.green),
+                                          child: Center(
+                                            child: MyText(
+                                              fontSize:
+                                                  context.screenSize * twoFont,
+                                              fieldName: 'Continue',
+                                              color: Colors.white,
+                                              textDirection: TextDirection.ltr,
+                                              fontWeight: FontWeight.bold,
+                                            ),
                                           ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                  SizedBox(
-                                    height: context.screenHeight * 25,
-                                  )
-                                ],
+                                    SizedBox(
+                                      height: context.screenHeight * 25,
+                                    )
+                                  ],
+                                ),
                               ),
                             ),
-                          ),
-                  ],
-                );
-              },
+                    ],
+                  );
+                },
+              ),
             ),
           ),
         ),
       ),
     );
+  }
+}
+
+class MyCustomPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final Paint paint = Paint()
+      ..color = Colors.green
+      ..style = PaintingStyle.fill;
+
+    canvas.drawCircle(const Offset(100, 150), 20, paint);
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) {
+    return false;
   }
 }
 
